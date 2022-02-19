@@ -1,7 +1,7 @@
 const question = document.querySelector("#question")
 const choices = Array.from(document.querySelectorAll(".choice-text"))
 const ProgressText = document.querySelector("#progressText")
-const Scoretext = document.querySelector("#Score")
+const ScoreText = document.querySelector("#score")
 const progressBarFull = document.querySelector("#progressBarFull")
 
 let currentQuestion = {}
@@ -17,7 +17,7 @@ let questions = [
         choice2: "carro",
         choice3: "gato",
         choice4: "bicicleta",
-        answer: "4",
+        answer: 2,
 
     },
     {
@@ -26,7 +26,7 @@ let questions = [
         choice2: "carro",
         choice3: "gato",
         choice4: "bicicleta",
-        answer: "4",
+        answer: 3,
 
     },
     {
@@ -35,7 +35,7 @@ let questions = [
         choice2: "carro",
         choice3: "gato",
         choice4: "bicicleta",
-        answer: "4",
+        answer: 4,
 
     },
     {
@@ -44,7 +44,7 @@ let questions = [
         choice2: "carro",
         choice3: "gato",
         choice4: "bicicleta",
-        answer: "4",
+        answer: 1,
 
     },
     {
@@ -53,7 +53,7 @@ let questions = [
         choice2: "carro",
         choice3: "gato",
         choice4: "bicicleta",
-        answer: "4",
+        answer: 3,
 
     },
     {
@@ -62,13 +62,13 @@ let questions = [
         choice2: "carro",
         choice3: "gato",
         choice4: "bicicleta",
-        answer: "4",
+        answer: 2,
 
-    },
+    }
 ]
 const SCORE_POINTS = 100
-const MAX_QUESTIONS = 4
-
+const MAX_QUESTIONS = 6
+//This function starts the game//
 startGame = () => {
     questionCounter = 0
     score = 0
@@ -76,7 +76,7 @@ startGame = () => {
     getNewQuestion()
 
 }
-
+// This fucntion gets the new question//
 getNewQuestion = () => {
     if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score)
@@ -84,23 +84,48 @@ getNewQuestion = () => {
         return window.location.assign('/end.html')
     }
     questionCounter++
-    ProgressText.innerText = `Question ${questionCouner} of ${MAX_QUESTIONS}`
+    ProgressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`//question one of ...
     progressBarFull.style.width = ` ${(questionCounter / MAX_QUESTIONS) * 100}%`
 
-    const questionIndex = Math.floor(Math.random() * availableQuestions.length)
-    currentQuestion = availableQuestions[questionIndex]
+    const questionsIndex = Math.floor(Math.random() * availableQuestions.length) //calculate the value of the questions index
+    currentQuestion = availableQuestions[questionsIndex]
     question.innerText = currentQuestion.question
 
     choices.forEach(choice => {
         const number = choice.dataset["number"]
         choice.innerText = currentQuestion["choice" + number]
     })
-    availableQuestions.splice(questionIndex, 1)
+    availableQuestions.splice(questionsIndex, 1)// removing elements from the array and replace
 
     acceptingAnswers = true
 
 }
 
 choices.forEach(choice => {
-    choice.addEventListener("click", e)
+    choice.addEventListener("click", e => {
+        if (!acceptingAnswers) return
+
+        acceptingAnswers = false
+        const selectedChoice = e.target
+        const selectedAnswer = selectedChoice.dataset["number"]
+
+        let classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect"
+
+        if (classToApply === "correct") {
+            incrementScore(SCORE_POINTS)
+        }
+        selectedChoice.parentElement.classList.add(classToApply)
+
+        setTimeout(() => {
+            selectedChoice.parentElement.classList.remove(classToApply)
+            getNewQuestion()
+        }, 1000)
+    })
 })
+
+incrementScore = num => {
+    score += num
+    scoreText.innerText = score
+}
+
+startGame()
