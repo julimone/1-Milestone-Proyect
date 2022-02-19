@@ -1,13 +1,109 @@
 body {
+    color:black
 
 }
 .choice-container {
     display: flex;
-    margin-bottom: 8rem;
+    margin-bottom: 0.8rem;
     width: 100%;
     border-radius: 4px;
     background:  rgb(196, 255, 178);
     font-size: 3rem;
     min-width: 80rem;
 
+}
+.choice-container:hover {
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 rgb(123, 75, 148) ;
+    transform: scale(1.02) ;
+    transform: transform 100ms;
+
+}
+.choice-prefix {
+    padding: 2rem 2.5rem;
+    color:black
+}
+
+.choice-text {
+    padding: 2rem;
+    width: 100%;
+}
+
+.correct {
+    background: greenyellow;
+}
+
+.incorrect {
+    background: red;
+}
+/* Display heads up*/
+
+#hud {
+    display: flex;
+    justify-content: space-between;
+}
+.hud-prefix {
+    text-align: center;
+    font-size: 2rem;
+}
+.hud-main-text {
+    text-align: center;
+}
+@media screen and (max-width:768px) {
+    .choice-container{
+        min-width: 40rem;
+    }
+}
+#progressBar {
+    width: 20rem;
+    height: 3rem;
+    border: 0.2rem solid greenyellow;
+    margin-top:2rem;
+    border-radius: 50px;
+    overflow: hidden;
+}
+#progressBarFull{
+    height: 100%;
+    background: yellowgreen;
+    width: 0%;
+}
+/* End page CSS */
+
+.end-form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 30rem;
+
+}
+input {
+    margin-bottom: 1rem;
+    width: 20rem;
+    padding: 1.5rem;
+    font-size: 1.8rem;
+    border: none;
+    box-shadow: 0 0.1rem  1.4rem 0 rgb(123, 75, 148) ;
+}
+
+input::placeholder{
+    color: #aaa;
+}
+
+#username {
+margin-bottom: 3rem;
+width: 100%;
+outline: none;
+}
+
+#end-text {
+    font-size: 2.4rem;
+    color: black;
+    text-align: center;
+}
+
+.fa.home {
+    margin-left: 1rem;
+    font-size: 2rem;
+    color: black;
 }
