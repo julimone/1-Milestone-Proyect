@@ -6,21 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
-    <link rel="stylesheet" href="Styles.css" type="text/css">
+    <link rel="stylesheet" href="styles.css" type="text/css">
     <script src="https://kit.fontawesome.com/31a1564a1b.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <script src="Script.js"></script>
 
     <div class="container">
-        <div id="home" class="flex-colum flex-center">
-            <h1> Are you ready?</h1>
-            <a href="/game.html" class="btn">Play</a>
-            <a href="/highscores.html" id="hightscore-btn" class="btn">High score <i class="fas fa-crown"></i></a>
-        </div>
-
+        <h1 id="heading"> Are you ready?</h1>
+        <!-- <input id="home" class="flex-colum flex-center"> -->
+        <input name="user" id="user" placeholder="Your Name" type="text" class="btn">
+        <a id="submit" href="./game.html" class="btn">Play</a>
+        <a href="./highScores.html" id="hightscore-btn" class="btn">High score <i class="fas fa-crown"></i></a>
     </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 
 </html>
